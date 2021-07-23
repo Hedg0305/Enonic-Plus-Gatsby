@@ -9,35 +9,37 @@ module.exports = {
     {
       resolve: `gatsby-plugin-enonic`,
       options: {
-        api: 'http://localhost:8080/site/hmdb/draft/hmdb/api',
+        api: 'http://localhost:8080/site/hmdb/master/hmdb/api',
         refetchInterval: 10,
-        pages: [{
-          query: require.resolve('./src/queries/getMovies'),
-          list: {
-            url: '/movies',
-            template: require.resolve('./src/templates/list'),
-            title: 'Movies'
+        pages: [
+          {
+            query: require.resolve('./src/queries/getMovies'),
+            list: {
+              url: '/movies',
+              template: require.resolve('./src/templates/list'),
+              title: 'Movies',
+            },
+            details: {
+              template: require.resolve('./src/templates/movie'),
+              key: 'name',
+              title: 'displayName',
+            },
           },
-          details: {
-            template: require.resolve('./src/templates/movie'),
-            key: 'name',
-            title: 'displayName'
-          }
-        },
-        {
-          query: require.resolve('./src/queries/getPersons'),
-          list: {
-            url: '/persons',
-            template: require.resolve('./src/templates/list'),
-            title: 'Persons'
+          {
+            query: require.resolve('./src/queries/getPersons'),
+            list: {
+              url: '/persons',
+              template: require.resolve('./src/templates/list'),
+              title: 'Persons',
+            },
+            details: {
+              template: require.resolve('./src/templates/person'),
+              key: 'name',
+              title: 'displayName',
+            },
           },
-          details: {
-            template: require.resolve('./src/templates/person'),
-            key: 'name',
-            title: 'displayName'
-          }
-        }]
-      }
+        ],
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
@@ -70,4 +72,4 @@ module.exports = {
       },
     },
   ],
-};
+}
